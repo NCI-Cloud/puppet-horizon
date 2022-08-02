@@ -32,7 +32,7 @@ describe 'horizon::wsgi::apache' do
         :access_log_file             => 'horizon_access.log',
         :access_log_format           => false,
         :error_log_file              => 'horizon_error.log',
-        :priority                    => '15',
+        :priority                    => 15,
         :serveraliases               => ['some.host.tld'],
         :docroot                     => '/var/www/',
         :ssl                         => 'false',
@@ -57,7 +57,7 @@ describe 'horizon::wsgi::apache' do
     context 'with overridden parameters' do
       before do
         params.merge!({
-          :priority          => '10',
+          :priority          => 10,
           :redirect_type     => 'temp',
           :wsgi_processes    => '13',
           :wsgi_threads      => '3',
@@ -142,7 +142,7 @@ describe 'horizon::wsgi::apache' do
         :access_log_file        => 'horizon_ssl_access.log',
         :access_log_format      => false,
         :error_log_file         => 'horizon_ssl_error.log',
-        :priority               => '15',
+        :priority               => 15,
         :serveraliases          => ['some.host.tld'],
         :docroot                => '/var/www/',
         :ssl                    => 'true',
@@ -174,7 +174,7 @@ describe 'horizon::wsgi::apache' do
         :access_log_file        => 'horizon_access.log',
         :access_log_format      => false,
         :error_log_file         => 'horizon_error.log',
-        :priority               => '15',
+        :priority               => 15,
         :serveraliases          => ['some.host.tld'],
         :docroot                => '/var/www/',
         :ssl                    => 'false',
