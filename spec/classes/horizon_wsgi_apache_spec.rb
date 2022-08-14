@@ -30,7 +30,6 @@ describe 'horizon::wsgi::apache' do
       it { should contain_apache__vhost('horizon_vhost').with(
         :servername                  => 'some.host.tld',
         :access_log_file             => 'horizon_access.log',
-        :access_log_format           => false,
         :error_log_file              => 'horizon_error.log',
         :priority                    => 15,
         :serveraliases               => ['some.host.tld'],
@@ -140,7 +139,6 @@ describe 'horizon::wsgi::apache' do
       it { should contain_apache__vhost('horizon_ssl_vhost').with(
         :servername             => 'some.host.tld',
         :access_log_file        => 'horizon_ssl_access.log',
-        :access_log_format      => false,
         :error_log_file         => 'horizon_ssl_error.log',
         :priority               => 15,
         :serveraliases          => ['some.host.tld'],
@@ -172,7 +170,6 @@ describe 'horizon::wsgi::apache' do
       it { should contain_apache__vhost('horizon_vhost').with(
         :servername             => 'some.host.tld',
         :access_log_file        => 'horizon_access.log',
-        :access_log_format      => false,
         :error_log_file         => 'horizon_error.log',
         :priority               => 15,
         :serveraliases          => ['some.host.tld'],
