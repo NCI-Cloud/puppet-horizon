@@ -118,8 +118,8 @@
 #
 class horizon::wsgi::apache (
   $bind_address                = undef,
-  $servername                  = $::fqdn,
-  $server_aliases              = $::fqdn,
+  $servername                  = $facts['networking']['fqdn'],
+  $server_aliases              = $facts['networking']['fqdn'],
   $listen_ssl                  = false,
   $http_port                   = 80,
   $https_port                  = 443,
@@ -128,7 +128,7 @@ class horizon::wsgi::apache (
   $horizon_key                 = undef,
   $horizon_ca                  = undef,
   $ssl_verify_client           = undef,
-  $wsgi_processes              = $::os_workers,
+  $wsgi_processes              = $facts['os_workers'],
   $wsgi_threads                = '1',
   $custom_wsgi_process_options = {},
   $priority                    = 15,
@@ -252,27 +252,27 @@ class horizon::wsgi::apache (
   )
 
   $default_vhost_conf_no_ip = {
-    servername                  => $servername,
-    serveraliases               => any2array($server_aliases),
-    docroot                     => '/var/www/',
-    access_log_file             => $access_log_file,
-    access_log_format           => $access_log_format,
-    error_log_file              => $error_log_file,
-    priority                    => $priority,
-    aliases                     => [{
+    servername             => $servername,
+    serveraliases          => any2array($server_aliases),
+    docroot                => '/var/www/',
+    access_log_file        => $access_log_file,
+    access_log_format      => $access_log_format,
+    error_log_file         => $error_log_file,
+    priority               => $priority,
+    aliases                => [{
       alias => "${root_url_real}/static",
       path  => "${root_path}/static",
     }],
-    port                        => $http_port,
-    ssl_cert                    => $horizon_cert,
-    ssl_key                     => $horizon_key,
-    ssl_ca                      => $horizon_ca,
-    ssl_verify_client           => $ssl_verify_client,
-    wsgi_script_aliases         => hash([$script_url, $::horizon::params::django_wsgi]),
-    wsgi_import_script          => $::horizon::params::django_wsgi,
-    wsgi_process_group          => $::horizon::params::wsgi_group,
-    wsgi_application_group      => $::horizon::params::wsgi_application_group,
-    redirectmatch_status        => $redirect_type,
+    port                   => $http_port,
+    ssl_cert               => $horizon_cert,
+    ssl_key                => $horizon_key,
+    ssl_ca                 => $horizon_ca,
+    ssl_verify_client      => $ssl_verify_client,
+    wsgi_script_aliases    => Hash([$script_url, $::horizon::params::django_wsgi]),
+    wsgi_import_script     => $::horizon::params::django_wsgi,
+    wsgi_process_group     => $::horizon::params::wsgi_group,
+    wsgi_application_group => $::horizon::params::wsgi_application_group,
+    redirectmatch_status   => $redirect_type,
   }
 
   # Only add the 'ip' element to the $default_vhost_conf hash if it was explicitly
@@ -299,7 +299,7 @@ class horizon::wsgi::apache (
     $default_vhost_conf,
     $extra_params,
     {
-      wsgi_daemon_process => hash([$::horizon::params::wsgi_group, $wsgi_daemon_process_options])
+      wsgi_daemon_process => Hash([$::horizon::params::wsgi_group, $wsgi_daemon_process_options])
     },
     {
       redirectmatch_regexp => $redirectmatch_regexp_real,
@@ -314,7 +314,7 @@ class horizon::wsgi::apache (
     $default_vhost_conf,
     $ssl_extra_params_real,
     {
-      wsgi_daemon_process => hash(['horizon-ssl', $wsgi_daemon_process_options]),
+      wsgi_daemon_process => Hash(['horizon-ssl', $wsgi_daemon_process_options]),
     },
     {
       access_log_file      => $ssl_access_log_file,
