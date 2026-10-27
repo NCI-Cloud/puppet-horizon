@@ -641,8 +641,8 @@ class horizon(
   $password_validator_help                 = undef,
   $customization_module                    = undef,
   $horizon_upload_mode                     = undef,
-  Optional[Enum['image', 'snapshot', 'volume', 'volume_snapshot']]
-    $default_boot_source                   = undef,
+  Optional[Enum['image', 'snapshot', 'volume', 'volume_snapshot']] $default_boot_source
+                                           = undef,
   $system_scope_services                   = undef,
   # DEPRECATED PARAMETERS
   $enable_user_pass                        = undef,
