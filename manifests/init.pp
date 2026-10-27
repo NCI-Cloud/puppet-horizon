@@ -807,7 +807,7 @@ and usage of a quoted value is deprecated.')
 
   if $compress_offline {
     Concat<| tag == 'django-config' |> ~> Exec['refresh_horizon_django_compress']
-    if $::osfamily == 'RedHat' {
+    if $facts['os']['family'] == 'RedHat' {
       Concat<| tag == 'django-config' |> ~> Exec['refresh_horizon_django_cache'] -> Exec['refresh_horizon_django_compress']
     }
   }
