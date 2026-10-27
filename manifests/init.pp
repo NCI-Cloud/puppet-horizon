@@ -622,7 +622,7 @@ class horizon(
   $default_theme                           = false,
   Enum['on', 'off'] $password_autocomplete = 'off',
   Enum['legacy', 'angular'] $images_panel  = 'legacy',
-  Hash $create_image_defaults              = {},
+  Optional[Hash] $create_image_defaults    = undef,
   Boolean $password_retrieve               = false,
   Boolean $disable_password_reveal         = false,
   Boolean $enforce_password_check          = false,
